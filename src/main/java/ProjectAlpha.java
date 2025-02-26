@@ -1,5 +1,4 @@
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.Acl;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.*;
@@ -9,22 +8,30 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.io.InputStream;
-import java.util.concurrent.CountDownLatch;
 
 public class ProjectAlpha {
     private JFrame frame;
+    private JDialog loginDialog;  // Store login window instance
 
     public ProjectAlpha() {
         FirebaseAuth.initializeFirebase();
-        showLoginPopup();
+        checkForUpdates();
+    }
+
+    private void checkForUpdates() {
+        VersionChecker.checkForUpdates(this, this::showLoginPopup);
+    }
+
+    public void closeLoginDialog() {
+        if (loginDialog != null) {
+            loginDialog.dispose();  // ✅ Closes the login popup when updating
+        }
     }
 
     private void showLoginPopup() {
-        JDialog loginDialog = new JDialog();
+        loginDialog = new JDialog();
         loginDialog.setTitle("Login Required");
         loginDialog.setSize(300, 150);
         loginDialog.setLayout(new BorderLayout());
@@ -80,7 +87,7 @@ public class ProjectAlpha {
                     loadMainInterface();
                 });
             }
-        }, 6800);
+        }, 4000 + (int) (Math.random() * 3000)); // Random delay between 4-7 sec
     }
 
     private void loadMainInterface() {
@@ -128,9 +135,7 @@ public class ProjectAlpha {
     }
 
     public static void main(String[] args) {
-        FirebaseAuth.initializeFirebase(); // ✅ Initialize Firebase FIRST
-        VersionChecker.checkForUpdates(); // 🚀 THEN check for updates
+        FirebaseAuth.initializeFirebase();
         SwingUtilities.invokeLater(ProjectAlpha::new);
     }
 }
-
