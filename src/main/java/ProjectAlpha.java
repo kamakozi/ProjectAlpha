@@ -5,9 +5,7 @@ import com.google.firebase.database.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,12 +47,15 @@ public class ProjectAlpha {
         FirebaseAuth firebaseAuth = new FirebaseAuth();
 
         loginButton.addActionListener(e -> {
-            if (firebaseAuth.verifyUserKey(inputField.getText())) {
-                loginDialog.dispose();
-                showLoadingScreen();
-            } else {
-                JOptionPane.showMessageDialog(loginDialog, "❌ Invalid Key! Try Again.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            firebaseAuth.verifyUserKey(inputField.getText(),
+                    () -> {
+                        loginDialog.dispose();
+                        showLoadingScreen();
+                    },
+                    () -> {
+                        JOptionPane.showMessageDialog(loginDialog, "❌ Invalid Key or HWID Mismatch!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+            );
         });
 
         loginDialog.setVisible(true);
