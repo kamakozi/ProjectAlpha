@@ -13,20 +13,16 @@ import java.util.TimerTask;
 
 public class ProjectAlpha {
     private JFrame frame;
-    private JDialog loginDialog;  // Store login window instance
+    private JDialog loginDialog;
 
     public ProjectAlpha() {
         FirebaseAuth.initializeFirebase();
-        checkForUpdates();
-    }
-
-    private void checkForUpdates() {
-        VersionChecker.checkForUpdates(this, this::showLoginPopup);
+        new Thread(() -> VersionChecker.checkForUpdates(this, this::showLoginPopup)).start();
     }
 
     public void closeLoginDialog() {
         if (loginDialog != null) {
-            loginDialog.dispose();  // ✅ Closes the login popup when updating
+            loginDialog.dispose();
         }
     }
 
@@ -87,7 +83,7 @@ public class ProjectAlpha {
                     loadMainInterface();
                 });
             }
-        }, 4000 + (int) (Math.random() * 3000)); // Random delay between 4-7 sec
+        }, 4000 + (int) (Math.random() * 3000));
     }
 
     private void loadMainInterface() {

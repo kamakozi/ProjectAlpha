@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VersionChecker {
-    private static final String CURRENT_VERSION = "0.05";
+    private static final String CURRENT_VERSION = "0.10";
     private static final DatabaseReference database = FirebaseDatabase.getInstance().getReference("versionControll");
 
     public static void checkForUpdates(ProjectAlpha appInstance, Runnable callback) {
@@ -21,36 +21,38 @@ public class VersionChecker {
                     Boolean requireUpdate = snapshot.child("require_update").getValue(Boolean.class);
                     String downloadUrl = snapshot.child("download_url").getValue(String.class);
 
-                    if (latestVersion != null && requireUpdate != null && requireUpdate) {
-                        if (!CURRENT_VERSION.equals(latestVersion.toString())) {
-                            System.out.println("🚀 A new update is available! Version: " + latestVersion);
-                            appInstance.closeLoginDialog();  // ✅ Closes login before update
+                    if (latestVersion != null && requireUpdate != null && requireUpdate && !CURRENT_VERSION.equals(latestVersion.toString())) {
+                        System.out.println("🚀 A new update is available! Version: " + latestVersion);
+                        appInstance.closeLoginDialog();
 
-                            showFakeDownloadAnimation(() -> {
-                                try {
-                                    String newJarPath = downloadFile(downloadUrl, "ProjectAlphaV1-" + latestVersion + ".jar");
+                        showFakeDownloadAnimation(() -> {
+                            try {
+                                String newJarPath = downloadFile(downloadUrl, "ProjectAlphaV1-" + latestVersion + ".jar");
 
-                                    showFakePatchingAnimation(() -> {
-                                        restartWithNewJar(newJarPath);
-                                    });
+                                showFakePatchingAnimation(() -> {
+                                    restartWithNewJar(newJarPath);
+                                });
 
-                                } catch (IOException e) {
-                                    System.err.println("❌ Failed to download update: " + e.getMessage());
-                                    callback.run();  // If update fails, continue with login
-                                }
-                            });
+                            } catch (IOException e) {
+                                System.err.println("❌ Failed to download update: " + e.getMessage());
+                                callback.run();
+                            }
+                        });
 
-                        }
                     } else {
-                        callback.run();
+                        System.out.println("✅ No update required. Proceeding to login.");
+                        SwingUtilities.invokeLater(callback);
                     }
+                } else {
+                    System.out.println("✅ No version info found, skipping update check.");
+                    SwingUtilities.invokeLater(callback);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 System.err.println("❌ Error checking version: " + error.getMessage());
-                callback.run();  // Continue if update check fails
+                SwingUtilities.invokeLater(callback);
             }
         });
     }
@@ -96,7 +98,7 @@ public class VersionChecker {
         patchDialog.add(new JLabel("Applying update, please wait...", SwingConstants.CENTER));
         patchDialog.setVisible(true);
 
-        Timer patchTimer = new Timer(4000, e -> {
+        Timer patchTimer = new Timer(5000, e -> {
             patchDialog.dispose();
             ((Timer) e.getSource()).stop();
             onComplete.run();
@@ -105,7 +107,6 @@ public class VersionChecker {
         patchTimer.start();
     }
 
-    // ✅ Missing Download Function
     private static String downloadFile(String fileURL, String saveFileName) throws IOException {
         if (fileURL == null || fileURL.isEmpty()) {
             throw new IOException("❌ No valid download URL provided.");
@@ -129,7 +130,6 @@ public class VersionChecker {
         return targetPath.toString();
     }
 
-    // ✅ Restart with the new JAR
     private static void restartWithNewJar(String jarPath) {
         System.out.println("🔄 Restarting with new version...");
 
