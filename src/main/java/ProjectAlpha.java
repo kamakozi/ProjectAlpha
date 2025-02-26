@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.io.InputStream;
+import java.util.concurrent.CountDownLatch;
 
 public class ProjectAlpha {
     private JFrame frame;
@@ -132,56 +134,3 @@ public class ProjectAlpha {
     }
 }
 
-class FirebaseAuth {
-    private static DatabaseReference database;
-
-    public static void initializeFirebase() {
-        try {
-            FileInputStream serviceAccount = new FileInputStream(new File("src/main/resources/memecoinserverauth.json"));
-
-            FirebaseOptions options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://memecoin-auth-default-rtdb.europe-west1.firebasedatabase.app")
-                    .build();
-
-            if (FirebaseApp.getApps().isEmpty()) {
-                FirebaseApp.initializeApp(options);
-            }
-
-            database = FirebaseDatabase.getInstance().getReference("users");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean verifyUserKey(String enteredKey) {
-        if (database == null) return false;
-
-        final boolean[] isValid = {false};
-        CountDownLatch latch = new CountDownLatch(1);
-
-        database.child("user1").child("key").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot.exists() && snapshot.getValue(Integer.class).equals(Integer.parseInt(enteredKey))) {
-                    isValid[0] = true;
-                }
-                latch.countDown();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                latch.countDown();
-            }
-        });
-
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return isValid[0];
-    }
-}

@@ -6,7 +6,7 @@ import java.net.URL;
 import java.nio.file.*;
 
 public class VersionChecker {
-    private static final String CURRENT_VERSION = "0.02";  // Change this when updating
+    private static final String CURRENT_VERSION = "0.03";  // Change this when updating
     private static final DatabaseReference database = FirebaseDatabase.getInstance().getReference("versionControll");
 
     public static void checkForUpdates() {
@@ -16,7 +16,7 @@ public class VersionChecker {
                 if (snapshot.exists()) {
                     Double latestVersion = snapshot.child("latest_version").getValue(Double.class);
                     Boolean requireUpdate = snapshot.child("require_update").getValue(Boolean.class);
-                    String downloadUrl = "https://github.com/YOUR_GITHUB_USERNAME/ProjectAlpha/releases/latest/download/ProjectAlphaV1.jar"; // Change this link when updating
+                    String downloadUrl = "https://github.com/kamakozi/ProjectAlpha/releases/latest/download/ProjectAlphaV1.jar"; // Change this link when updating
 
                     if (latestVersion != null && requireUpdate != null && requireUpdate) {
                         if (!CURRENT_VERSION.equals(latestVersion.toString())) {
