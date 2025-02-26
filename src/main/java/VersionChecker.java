@@ -6,7 +6,7 @@ import java.net.URL;
 import java.nio.file.*;
 
 public class VersionChecker {
-    private static final String CURRENT_VERSION = "0.03";  // Change this when updating
+    private static final String CURRENT_VERSION = "0.04";  // Change this when updating
     private static final DatabaseReference database = FirebaseDatabase.getInstance().getReference("versionControll");
 
     public static void checkForUpdates() {
