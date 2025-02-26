@@ -126,6 +126,8 @@ public class ProjectAlpha {
     }
 
     public static void main(String[] args) {
+        FirebaseAuth.initializeFirebase(); // ✅ Initialize Firebase FIRST
+        VersionChecker.checkForUpdates(); // 🚀 THEN check for updates
         SwingUtilities.invokeLater(ProjectAlpha::new);
     }
 }
