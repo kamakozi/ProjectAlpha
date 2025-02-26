@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VersionChecker {
-    private static final String CURRENT_VERSION = "0.10";
+    private static final String CURRENT_VERSION = "0.1";
     private static final DatabaseReference database = FirebaseDatabase.getInstance().getReference("versionControll");
 
     public static void checkForUpdates(ProjectAlpha appInstance, Runnable callback) {
