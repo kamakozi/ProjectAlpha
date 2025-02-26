@@ -1,0 +1,87 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MemeCoinApp {
+    private JFrame frame;
+    private JTextField depositField, coinNameField, coinSupplyField, buyAmountField, buyCoinNameField;
+    private JTextArea outputArea;
+    private Map<String, Integer> memeCoins = new HashMap<>();
+    private double walletBalance = 0.0;
+
+    public MemeCoinApp() {
+        frame = new JFrame("MemeCoin Creator");
+        frame.setSize(1000, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout(20, 20));
+        frame.setMinimumSize(new Dimension(800, 500));
+
+        UIManager.put("Panel.background", new Color(30, 30, 30));
+        UIManager.put("Label.foreground", Color.WHITE);
+        UIManager.put("TextField.background", new Color(50, 50, 50));
+        UIManager.put("TextField.foreground", Color.WHITE);
+        UIManager.put("TextField.caretForeground", Color.WHITE);
+        UIManager.put("TextArea.background", new Color(40, 40, 40));
+        UIManager.put("TextArea.foreground", Color.WHITE);
+
+        JPanel sidePanel = new JPanel();
+        sidePanel.setLayout(new GridLayout(5, 1, 10, 10));
+        sidePanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        sidePanel.setBackground(new Color(25, 25, 25));
+
+        JButton depositButton = createStyledButton("Deposit");
+        JButton createCoinButton = createStyledButton("Create Meme Coin");
+        JButton autoBuyButton = createStyledButton("Auto Buy");
+        JButton userInfoButton = createStyledButton("User Info");
+
+        sidePanel.add(depositButton);
+        sidePanel.add(createCoinButton);
+        sidePanel.add(autoBuyButton);
+        sidePanel.add(userInfoButton);
+
+        outputArea = new JTextArea();
+        outputArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(outputArea);
+        scrollPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 1), "Output"));
+        scrollPane.setPreferredSize(new Dimension(350, 550));
+
+        frame.add(sidePanel, BorderLayout.WEST);
+        frame.add(scrollPane, BorderLayout.CENTER);
+        frame.setVisible(true);
+    }
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFocusPainted(false);
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setBackground(new Color(80, 170, 240));
+        button.setForeground(Color.BLACK);
+        button.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        button.setOpaque(true);
+        button.setPreferredSize(new Dimension(200, 50));
+        button.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        button.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2, true));
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(new Color(30, 90, 200));
+                button.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(new Color(80, 170, 240));
+                button.setForeground(Color.BLACK);
+            }
+        });
+        return button;
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(MemeCoinApp::new);
+    }
+}

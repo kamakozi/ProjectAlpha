@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "memecoin-auth",
+  "private_key_id": "8d3cb88ae03b5cccde1c5dc91dd4171a044df077",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDFfM7jaGCsYtaT\nqK4tttHHB3z/qCCvCLzXeWqik0LIT2EocOUEdmINe9KFmplXZM6+7J5a6tNG7ZlA\n/obgivYmu1qOITuHXvNU8baULYwMAH0zWYLmJqAV/kOM7HUYakf3gSYCEVPamXuy\nfABqWLANHU1djqaU4okvMFeyqrHp2yeNkITjwYh7mjR6W5iykWW3hu1wBlSgB18i\nY7rq2iAI9lJQCj7ZuXxpYDA7j5DaL8yjX+UHnsoI2FjufHCZWTqcUwCYQxEX4+7e\n5EDSkF4MZawu1CQVYLejWVXQvlKvCsYDgVifxEjxBHPDJ0gAnZgJ/KyRjhT8j90g\n7gUQd7qBAgMBAAECggEABBPt7LWuy1h2IFHrGNAN2Ft/+gJ1fE/EoHlmGYnLZvn2\nomBkZjlwkGE2aWJWGL8g4sHdijiPmMcWs0geLlxINWgIeGdYxJSSFzavg7NGEUhg\nTXNjd8+j3hhkOjB2wYSOTF7LE19auSiSrI6RbqC6r+ajPpOPvoLH/OS1Zt/N8St3\nRdUH1e4Nv/Vk9oYo1GNxCe3HMfHUdmvjymwcNuIPXlCRgcFXFAqJBTBI9C6TLLTF\nXvq//vQqqHoqtVCPN79YEOuUNq3/Jr94nVjkwsiC85e+WRQCeG94w4s6X0nTxUtp\ngtvqbvcuS+As+lIBcva+Px+jbQHCiNMntGjHlYihvQKBgQDk47b7tArI8/iAs1VQ\nI8eqyZZA6ly/eAhv1UMUEdZecv6zSu5OESzAdrtyXuSmrdvRrfGn75p7Ep1XpqLo\nmjBdPt5hSWJPg/FKd5CpDnfIrrtFMwoDtDgSwmsJNxeTNCltQVUiVVncNV1GdUmD\nF8fQVDPAVZ0KFem/PIJBFoVL7QKBgQDc4O/Hhtl5lJATnA8PdyMg91bB205rEJDv\n54MvhwDGw7ZLlIg6HGE2ZVHnWD2BLPQB0PHERH1DoafK2Wp61p4Lzfyc/TWh/KHw\nJ6r4it3ZBfJMuNlMa5MEUGc+pT9ymt0ITuKFSxp/En1BW31ttLp/zUOj5RNSlPv/\nC3Dr+YceZQKBgQC2XZhVQ0W0hm3gXQIEL/3N3X+RiSkMhJ50O/6N5whdiFHWmET2\nfkihr/f5UBHtm2ggz+5SV11F4bbrNyFlIjSWlpin+sgRgpalNk5T4+scQduDbv7z\npItopu6REQv/hPfczMj/6fEGup3unVRM1o2lNvFktNHCT2NFsvg007SwoQKBgCF5\nRV1rplGynhMat32UhJJeaZt/bOb038I7x7nQL+HvjxTtMaf83Q6tVDhHOyr0cRZF\nYB5qcsFpIlCvml97XwBS+1GfXh1qd/A5UsPP58cYC5xs9yGJvAIPXVY1HOR1a8Hy\nkom41A8l8i2Re/TASvNLXFDeSotdYMNKLJbWfg+xAoGAZnIH8iisKmcs3Mq7rnof\nv0zUDFB2E4hkdbLdiBn/tpUeELiivWbc6MOsap43yPuJBfMeE9c2QlQ+v0W+2vCf\n3+Wv4QoI6uoxzGZqbrjuFEoM+btZO6d/I2RD3HJSVjBeT2urstWyxkqb7TywLu17\nm0KcWPkUToMnkoaHgz/OpEY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@memecoin-auth.iam.gserviceaccount.com",
+  "client_id": "109681063400822092462",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40memecoin-auth.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
